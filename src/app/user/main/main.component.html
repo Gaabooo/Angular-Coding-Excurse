@@ -1,0 +1,12 @@
+<mat-card class="card">
+  <mat-card-title>Welcome To a Sample of Chorus.AI technology!</mat-card-title>
+  <mat-card-subtitle>Please input an Id and press the button</mat-card-subtitle>
+  <mat-card-subtitle>Example: 4d79041e-f25f-421d-9e5f-3462459b9934 </mat-card-subtitle>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput [(ngModel)]="id" placeholder="Input Video Id">
+    </mat-form-field>
+    <br />
+    <button mat-raised-button (click)="openDialog()" color="primary">Start Transcripted Video</button>
+  </mat-card-content>
+</mat-card>

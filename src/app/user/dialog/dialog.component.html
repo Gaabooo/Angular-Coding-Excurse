@@ -1,0 +1,40 @@
+<div mat-dialog-content *ngIf="data.id == null; else showVideo">
+  <p>No id was given. Please input one.</p>
+</div>
+<ng-template #showVideo>
+  <mat-spinner *ngIf="loading == true; else showDialog"></mat-spinner>
+  <ng-template #showDialog>
+    <div mat-dialog-content *ngIf="transcripts.length == 0; else showVideoContent">
+      <p>Video/Transcripts do not exist for that particular id. Please input a different one.</p>
+    </div>
+    <ng-template #showVideoContent>
+      <div class="videoContainer">
+        <video [src]="videoUrl" #videoPlayer controls>
+          <source type="video/mp4">
+          Video does not exist!
+        </video>
+      </div>
+      <div mat-dialog-content>
+        <mat-card *ngFor="let combinedT of combinedTranscripts" class="speakerCard">
+          <mat-card-title>
+            <mat-chip-list>
+              <mat-chip [ngClass]="combinedT[0].speaker | lowercase">{{ combinedT[0].speaker }}</mat-chip>
+            </mat-chip-list>
+          </mat-card-title>
+          <mat-card-content>
+            <mat-list *ngFor="let transcript of combinedT">
+              <mat-list-item>
+                <mat-icon matListIcon>record_voice_over</mat-icon>
+                <h3 matLine class="snippet"> {{ transcript.snippet }} </h3>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </ng-template>
+
+  </ng-template>
+</ng-template>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="close()" color="accent">Close</button>
+</div>
